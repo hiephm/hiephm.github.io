@@ -20,14 +20,14 @@ const AUDIO_COUNTDOWN = {
     240: 'https://file01.fpt.ai/public/tts/plank/09_240s.mp3',
     270: 'https://file01.fpt.ai/public/tts/plank/10_270s.mp3',
 };
-const DEFAULT_START_DATE = "2021-04-11";
+const DEFAULT_START_DATE = "2021-04-12";
 
 var startDate = moment(window.location.hash.replace('#', ''));
 if (!startDate.isValid()) {
     startDate = moment(DEFAULT_START_DATE);
 }
 
-var current_day = moment().diff(startDate, 'days');
+var current_day = moment().diff(startDate, 'days') + 1;
 
 var duration = days[current_day];
 
