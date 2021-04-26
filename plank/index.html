@@ -260,10 +260,11 @@
     }
     function pauseTimer(event){
         if(isStarted === false){
-            $('#audio-prepare').on('ended', function () {
-                timer(wholeTime);
-            });
             $('#audio-prepare')[0].play();
+            setTimeout(function () {
+                timer(wholeTime);
+            }, 6500);
+
             isStarted = true;
             this.classList.remove('play');
             this.classList.add('pause');
