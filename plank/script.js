@@ -6,20 +6,6 @@ const days = {
     27: 240, 28: 240, 29: 250, 30: 300
 };
 
-const AUDIO_PREPARE = 'https://file01.fpt.ai/public/tts/plank/00_prepare.mp3';
-const AUDIO_COMPLETE = 'https://file01.fpt.ai/public/tts/plank/completed.mp3';
-const AUDIO_COUNTDOWN = {
-    10: 'https://file01.fpt.ai/public/tts/plank/01_10s_countdown.mp3',
-    30: 'https://file01.fpt.ai/public/tts/plank/02_30s.mp3',
-    60: 'https://file01.fpt.ai/public/tts/plank/03_60s.mp3',
-    90: 'https://file01.fpt.ai/public/tts/plank/04_90s.mp3',
-    120: 'https://file01.fpt.ai/public/tts/plank/05_120s.mp3',
-    150: 'https://file01.fpt.ai/public/tts/plank/06_150s.mp3',
-    180: 'https://file01.fpt.ai/public/tts/plank/07_180s.mp3',
-    210: 'https://file01.fpt.ai/public/tts/plank/08_210s.mp3',
-    240: 'https://file01.fpt.ai/public/tts/plank/09_240s.mp3',
-    270: 'https://file01.fpt.ai/public/tts/plank/10_270s.mp3',
-};
 const DEFAULT_START_DATE = "2021-04-12";
 
 var startDate = moment(window.location.hash.replace('#', ''));

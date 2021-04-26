@@ -121,6 +121,7 @@
         #e-pointer { transition: transform 0.7s; }
         h1 { margin-top:10px; text-align:center; color: #0052cc;}
         body { background-color:#f7f7f7;}
+        audio { display: none;}
     </style>
 </head>
 <body>
@@ -160,23 +161,20 @@
         <button class="play" id="pause"></button>
     </div>
 </div>
+<audio id="audio-prepare" controls preload="auto" src="https://file01.fpt.ai/public/tts/plank/00_prepare.mp3">
+<audio id="audio-completed" controls preload="auto" src="https://file01.fpt.ai/public/tts/plank/completed.mp3">
+<audio id="audio-10" controls preload="auto" src="https://file01.fpt.ai/public/tts/plank/01_10s_countdown.mp3">
+<audio id="audio-30" controls preload="auto" src="https://file01.fpt.ai/public/tts/plank/02_30s.mp3">
+<audio id="audio-60" controls preload="auto" src="https://file01.fpt.ai/public/tts/plank/03_60s.mp3">
+<audio id="audio-90" controls preload="auto" src="https://file01.fpt.ai/public/tts/plank/04_90s.mp3">
+<audio id="audio-120" controls preload="auto" src="https://file01.fpt.ai/public/tts/plank/05_120s.mp3">
+<audio id="audio-150" controls preload="auto" src="https://file01.fpt.ai/public/tts/plank/06_150s.mp3">
+<audio id="audio-180" controls preload="auto" src="https://file01.fpt.ai/public/tts/plank/07_180s.mp3">
+<audio id="audio-210" controls preload="auto" src="https://file01.fpt.ai/public/tts/plank/08_210s.mp3">
+<audio id="audio-240" controls preload="auto" src="https://file01.fpt.ai/public/tts/plank/09_240s.mp3">
+<audio id="audio-270" controls preload="auto" src="https://file01.fpt.ai/public/tts/plank/10_270s.mp3">
 
-<link rel="preload" as="audio" href="https://file01.fpt.ai/public/tts/plank/00_prepare.mp3">
-<link rel="preload" as="audio" href="https://file01.fpt.ai/public/tts/plank/completed.mp3">
-<link rel="preload" as="audio" href="https://file01.fpt.ai/public/tts/plank/01_10s_countdown.mp3">
-<link rel="preload" as="audio" href="https://file01.fpt.ai/public/tts/plank/02_30s.mp3">
-<link rel="preload" as="audio" href="https://file01.fpt.ai/public/tts/plank/03_60s.mp3">
-<link rel="preload" as="audio" href="https://file01.fpt.ai/public/tts/plank/04_90s.mp3">
-<link rel="preload" as="audio" href="https://file01.fpt.ai/public/tts/plank/05_120s.mp3">
-<link rel="preload" as="audio" href="https://file01.fpt.ai/public/tts/plank/06_150s.mp3">
-<link rel="preload" as="audio" href="https://file01.fpt.ai/public/tts/plank/07_180s.mp3">
-<link rel="preload" as="audio" href="https://file01.fpt.ai/public/tts/plank/08_210s.mp3">
-<link rel="preload" as="audio" href="https://file01.fpt.ai/public/tts/plank/09_240s.mp3">
-<link rel="preload" as="audio" href="https://file01.fpt.ai/public/tts/plank/10_270s.mp3">
-
-<audio id="audio" controls style="display:none;"></audio>
-
-<script src="script.js?v=1.1"></script>
+<script src="script.js?v=1.2"></script>
 <script>
     //circle start
     let progressBar = document.querySelector('.e-c-progress');
@@ -241,13 +239,11 @@
 
         intervalTimer = setInterval(function(){
             timeLeft = Math.round((remainTime - Date.now()) / 1000);
-            if (AUDIO_COUNTDOWN[timeLeft] != undefined) {
-                audio.src = AUDIO_COUNTDOWN[timeLeft];
-                audio.play();
+            if ($('#audio-' + timeLeft).length > 0) {
+                $('#audio-' + timeLeft)[0].play();
             }
             if(timeLeft < 0){
-                audio.src = AUDIO_COMPLETE;
-                audio.play();
+                $('#audio-completed')[0].play();
                 clearInterval(intervalTimer);
                 isStarted = false;
                 setterBtns.forEach(function(btn){
@@ -264,11 +260,10 @@
     }
     function pauseTimer(event){
         if(isStarted === false){
-            audio.src = AUDIO_PREPARE;
-            audio.play();
-            setTimeout(function () {
+            $('#audio-prepare').on('ended', function () {
                 timer(wholeTime);
-            }, 6500);
+            });
+            $('#audio-prepare')[0].play();
             isStarted = true;
             this.classList.remove('play');
             this.classList.add('pause');
